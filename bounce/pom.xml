@@ -11,6 +11,34 @@
 	<name>bounce</name>
 	<description>ricko.is redirector</description>
 
+	<licenses>
+		<license>
+			<name>Creative Commons BY-NC-SA 4.0</name>
+			<url>https://creativecommons.org/licenses/by-nc-sa/4.0/</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<name>Rick Osborne</name>
+			<roles>
+				<role>Developer</role>
+				<role>Owner</role>
+				<role>self</role>
+			</roles>
+			<url>https://rickosborne.org</url>
+			<url>https://github.com/rickosborne</url>
+		</developer>
+	</developers>
+
+	<inceptionYear>2018</inceptionYear>
+
+	<scm>
+		<url>https://github.com/rickosborne/bounce</url>
+		<connection>scm:git:git://github.com/rickosborne/bounce.git</connection>
+		<developerConnection>scm:git:git@github.com:rickosborne/bounce.git</developerConnection>
+	</scm>
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
