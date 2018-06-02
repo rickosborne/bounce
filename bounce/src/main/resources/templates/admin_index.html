@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>ricko.is Authentication</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+</head>
+<body>
+<section class="mdl-layout">
+<main class="mdl-layout__content">
+
+<h1>Admin</h1>
+<table width="100%">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Key</th>
+      <th>Created</th>
+      <th>Hits</th>
+      <th>Peeks</th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr th:each="link : ${links}" valign="top">
+    <td th:text="${link.id}" align="center"></td>
+    <td>
+      <a th:href="${link.to}" th:title="${link.name}" th:text="${link.title}"></a>
+    </td>
+    <td th:text="${link.created}" align="center"></td>
+    <td th:text="${link.hits}" align="center"></td>
+    <td th:text="${link.peeks}" align="center"></td>
+  </tr>
+  </tbody>
+</table>
+
+</main>
+
+</section>
+</body>
+</html>

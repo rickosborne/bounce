@@ -9,5 +9,5 @@ data class BounceLink (
     val hits: Int? = null,
     val peeks: Int? = null,
     val to: String,
-    val title: String
+    val title: String? = null
 )

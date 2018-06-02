@@ -21,7 +21,7 @@ class BounceController @Autowired constructor(
     private val bounceLinkGateway: BounceLinkGateway,
     private val config: BounceConfig
 ) {
-    @RequestMapping(path = ["/{key}", "/"], method = [RequestMethod.GET, RequestMethod.HEAD])
+    @RequestMapping(path = ["/{key:^(?!oauth|admin).*$}", "/"], method = [RequestMethod.GET, RequestMethod.HEAD])
     fun bounceGet(
         @PathVariable(value = "key", required = false) key: String?,
         request: HttpServletRequest,
