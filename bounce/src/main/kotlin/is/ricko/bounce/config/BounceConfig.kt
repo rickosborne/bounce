@@ -1,4 +1,4 @@
-package `is`.ricko.bounce
+package `is`.ricko.bounce.config
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration
@@ -24,6 +24,8 @@ class BounceConfig {
 
     var jdbcPassword: String? = null
         @Value("\${is.ricko.bounce.jdbc.password}") set
+
+    var logHeaders: Boolean = false
 
     val oauth2clientId: MutableMap<String, String> = HashMap()
 
@@ -62,6 +64,13 @@ class BounceConfig {
     fun setOAuthRedirect(redirectUri: String?) {
         if (redirectUri != null && !redirectUri.isBlank()) {
             oauth2redirectUri = redirectUri
+        }
+    }
+
+    @Value("\${is.ricko.bounce.log.headers:}")
+    fun setLogHeaders(logHeaders: String?) {
+        if (logHeaders != null && !logHeaders.isBlank()) {
+            this.logHeaders = logHeaders.toBoolean()
         }
     }
 

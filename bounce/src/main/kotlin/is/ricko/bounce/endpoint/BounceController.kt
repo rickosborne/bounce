@@ -1,5 +1,10 @@
-package `is`.ricko.bounce
+package `is`.ricko.bounce.endpoint
 
+import `is`.ricko.bounce.config.BounceConfig
+import `is`.ricko.bounce.data.BounceLinkGateway
+import `is`.ricko.bounce.error.NotFoundException
+import `is`.ricko.bounce.model.BounceAgent
+import `is`.ricko.bounce.model.BounceLink
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
@@ -35,7 +40,7 @@ class BounceController @Autowired constructor(
         bounceLinkGateway.hitOrPeek(
             isPeek = isPeek,
             link = link,
-            ipv4 = ipv4FromAddr(request.remoteAddr),
+            ipv4 = request.remoteAddr,
             ref = chop(request.getHeader("Referer"), 255),
             ua = chop(ua, 255),
             cookie = chop(cookie, 32),

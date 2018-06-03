@@ -1,5 +1,6 @@
-package `is`.ricko.bounce
+package `is`.ricko.bounce.config
 
+import `is`.ricko.bounce.config.BounceConfig
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.springframework.beans.factory.annotation.Autowired

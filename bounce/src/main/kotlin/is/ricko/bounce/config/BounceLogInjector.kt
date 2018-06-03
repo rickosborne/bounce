@@ -1,4 +1,4 @@
-package `is`.ricko.bounce
+package `is`.ricko.bounce.config
 
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.config.BeanPostProcessor

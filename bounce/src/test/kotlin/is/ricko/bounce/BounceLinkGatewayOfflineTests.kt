@@ -1,5 +1,9 @@
 package `is`.ricko.bounce
 
+import `is`.ricko.bounce.data.BounceLinkGateway
+import `is`.ricko.bounce.data.SELECT_ALL_UA
+import `is`.ricko.bounce.model.BounceAgentRule
+import `is`.ricko.bounce.model.MatchExtractor
 import org.junit.Test
 import org.mockito.Mockito.*
 import org.springframework.jdbc.core.JdbcTemplate

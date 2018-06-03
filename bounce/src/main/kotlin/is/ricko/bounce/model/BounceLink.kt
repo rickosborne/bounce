@@ -1,4 +1,4 @@
-package `is`.ricko.bounce
+package `is`.ricko.bounce.model
 
 import java.util.*
 

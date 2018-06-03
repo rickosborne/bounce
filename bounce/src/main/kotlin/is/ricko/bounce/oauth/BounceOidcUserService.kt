@@ -1,5 +1,6 @@
-package `is`.ricko.bounce
+package `is`.ricko.bounce.oauth
 
+import `is`.ricko.bounce.data.BounceAdminGateway
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException

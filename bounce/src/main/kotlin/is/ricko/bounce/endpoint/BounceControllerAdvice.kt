@@ -1,5 +1,6 @@
-package `is`.ricko.bounce
+package `is`.ricko.bounce.endpoint
 
+import `is`.ricko.bounce.error.NotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler

@@ -1,4 +1,4 @@
-package `is`.ricko.bounce
+package `is`.ricko.bounce.model
 
 data class BounceAgent (
     val vendor: String?,

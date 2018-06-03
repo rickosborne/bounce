@@ -1,5 +1,6 @@
-package `is`.ricko.bounce
+package `is`.ricko.bounce.data
 
+import `is`.ricko.bounce.model.BounceAdmin
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Component

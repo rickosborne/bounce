@@ -3,7 +3,7 @@ package `is`.ricko.bounce
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackageClasses = [BounceApplication::class])
 class BounceApplication
 
 fun main(args: Array<String>) {

@@ -1,5 +1,6 @@
-package `is`.ricko.bounce
+package `is`.ricko.bounce.endpoint
 
+import `is`.ricko.bounce.data.BounceLinkGateway
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping

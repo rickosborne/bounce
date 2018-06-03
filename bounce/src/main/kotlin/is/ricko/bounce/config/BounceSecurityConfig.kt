@@ -1,5 +1,9 @@
-package `is`.ricko.bounce
+package `is`.ricko.bounce.config
 
+import `is`.ricko.bounce.data.BounceAdminGateway
+import `is`.ricko.bounce.oauth.BounceOAuthUserService
+import `is`.ricko.bounce.oauth.BounceOidcUserService
+import org.slf4j.Logger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -17,6 +21,9 @@ class BounceSecurityConfig @Autowired constructor(
     private val config: BounceConfig,
     adminGateway: BounceAdminGateway
 ) : WebSecurityConfigurerAdapter() {
+    @Logging
+    private var logger: Logger? = null
+
     private val clients: List<String> = listOf(GOOGLE, GITHUB)
     // So this private-backing-field thing looks dumb, but ...
     private val _clientRegistrationRepository = InMemoryClientRegistrationRepository(clients
@@ -65,6 +72,11 @@ class BounceSecurityConfig @Autowired constructor(
                     .antMatchers(OAUTH_LOGIN_PATH).permitAll()
                     .antMatchers("/admin/**").authenticated()
                     .anyRequest().permitAll()
+                    .and()
+                .exceptionHandling()
+                    .accessDeniedHandler { request, response, accessDeniedException ->
+                        logger?.error("Access denied: ${request.remoteAddr}")
+                    }
                     .and()
                 .oauth2Login()
                     .clientRegistrationRepository(_clientRegistrationRepository)
