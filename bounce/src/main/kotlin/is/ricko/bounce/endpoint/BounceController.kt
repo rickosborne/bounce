@@ -37,10 +37,21 @@ class BounceController @Autowired constructor(
         val agent: BounceAgent? = bounceLinkGateway.agent(ua)
         val isPeek: Boolean = HttpMethod.HEAD.matches(request.method)
         val cookie: String? = getCookie(request)
+        val remoteAddr: String = request.remoteAddr
+        val ipv4: String?
+        val ipv6: String?
+        if (remoteAddr.contains(':')) {
+            ipv4 = null
+            ipv6 = remoteAddr
+        } else {
+            ipv4 = remoteAddr
+            ipv6 = null
+        }
         bounceLinkGateway.hitOrPeek(
             isPeek = isPeek,
             link = link,
-            ipv4 = request.remoteAddr,
+            ipv4 = ipv4,
+            ipv6 = ipv6,
             ref = chop(request.getHeader("Referer"), 255),
             ua = chop(ua, 255),
             cookie = chop(cookie, 32),

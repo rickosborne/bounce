@@ -1,9 +1,9 @@
 package `is`.ricko.bounce.data
 
-import `is`.ricko.bounce.model.BounceAgentRule
-import `is`.ricko.bounce.model.MatchExtractor
 import `is`.ricko.bounce.model.BounceAgent
+import `is`.ricko.bounce.model.BounceAgentRule
 import `is`.ricko.bounce.model.BounceLink
+import `is`.ricko.bounce.model.MatchExtractor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Component
@@ -52,10 +52,10 @@ class BounceLinkGateway @Autowired constructor(private val jdbcTemplate: JdbcTem
         )
     }
 
-    fun hitOrPeek(isPeek: Boolean, link: BounceLink, ipv4: String?, ref: String?, ua: String?, cookie: String?, ua_vendor: String?, ua_major: Int?, ua_ver: String?, mobile: Boolean?, bot: Boolean?) {
+    fun hitOrPeek(isPeek: Boolean, link: BounceLink, ipv4: String?, ipv6: String?, ref: String?, ua: String?, cookie: String?, ua_vendor: String?, ua_major: Int?, ua_ver: String?, mobile: Boolean?, bot: Boolean?) {
         jdbcTemplate.update(INSERT_HIT,
-            arrayOf(link.id, ipv4, ref, ua, cookie, ua_vendor, ua_major, ua_ver, if (mobile != null && mobile) 1 else 0, if (bot != null && bot) 1 else 0),
-            intArrayOf(Types.INTEGER, orNull(ipv4, Types.VARCHAR), orNull(ref, Types.VARCHAR), orNull(ua, Types.VARCHAR), orNull(cookie, Types.VARCHAR), orNull(ua_vendor, Types.VARCHAR), orNull(ua_major, Types.INTEGER), orNull(ua_ver, Types.VARCHAR), Types.BIT, Types.BIT)
+            arrayOf(link.id, ipv4, ipv6, ref, ua, cookie, ua_vendor, ua_major, ua_ver, if (mobile != null && mobile) 1 else 0, if (bot != null && bot) 1 else 0),
+            intArrayOf(Types.INTEGER, orNull(ipv4, Types.VARCHAR), orNull(ipv6, Types.VARCHAR), orNull(ref, Types.VARCHAR), orNull(ua, Types.VARCHAR), orNull(cookie, Types.VARCHAR), orNull(ua_vendor, Types.VARCHAR), orNull(ua_major, Types.INTEGER), orNull(ua_ver, Types.VARCHAR), Types.BIT, Types.BIT)
         )
         jdbcTemplate.update(if (isPeek) UPDATE_PEEKS_BY_ID else UPDATE_HITS_BY_ID, arrayOf(link.id ?: -1), intArrayOf(Types.INTEGER))
     }
@@ -112,8 +112,8 @@ const val SELECT_LINK_BY_NAME = """
     """
 
 const val INSERT_HIT = """
-    INSERT INTO bounce_hit (hit_dt, hit_link, hit_ip4, hit_ref, hit_ua, hit_cookie, hit_ua_vendor, hit_ua_major, hit_ua_ver, hit_mobile, hit_bot)
-    VALUES (CURRENT_TIMESTAMP, ?, INET_ATON(?), ?, ?, ?, ?, ?, ?, ?, ?)
+    INSERT INTO bounce_hit (hit_dt, hit_link, hit_ip4, hit_ip6, hit_ref, hit_ua, hit_cookie, hit_ua_vendor, hit_ua_major, hit_ua_ver, hit_mobile, hit_bot)
+    VALUES (CURRENT_TIMESTAMP, ?, INET_ATON(?), INET6_ATON(?), ?, ?, ?, ?, ?, ?, ?, ?)
     """
 
 const val UPDATE_PEEKS_BY_ID = """

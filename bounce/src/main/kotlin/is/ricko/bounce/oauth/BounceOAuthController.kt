@@ -1,7 +1,8 @@
 package `is`.ricko.bounce.oauth
 
-import `is`.ricko.bounce.config.OAUTH_LOGIN_PATH
+import `is`.ricko.bounce.config.OAUTH_ENABLED
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Profile
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
@@ -14,6 +15,7 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.client.RestTemplate
 
+@Profile(OAUTH_ENABLED)
 @Controller
 class BounceOAuthController @Autowired constructor(
     private val authorizedClientService: OAuth2AuthorizedClientService,

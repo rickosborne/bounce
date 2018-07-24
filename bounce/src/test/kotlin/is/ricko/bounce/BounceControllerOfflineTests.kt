@@ -8,6 +8,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mockito.*
 import java.net.Inet4Address
+import java.net.Inet6Address
 import java.util.*
 import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletRequest
@@ -28,9 +29,10 @@ class BounceControllerOfflineTests : ABounceOfflineTests() {
         doReturn(null).`when`(gateway).agent(anyString())
         doReturn(arrayOf<Cookie>()).`when`(request).cookies
         val ipv4: String = Inet4Address.getLocalHost().hostAddress
+        val ipv6: String = Inet6Address.getLocalHost().hostAddress
         `when`(request.remoteAddr).thenReturn(ipv4)
         controller.bounceGet(key, request, response)
-        verify(gateway, times(1)).hitOrPeek(nonNull(false), nonNull(link), nonNull(ipv4), eq(null), eq(null), eq(null), eq(null), eq(null), eq(null), eq(null), eq(null))
+        verify(gateway, times(1)).hitOrPeek(nonNull(false), nonNull(link), nonNull(ipv4), nonNull(ipv6), eq(null), eq(null), eq(null), eq(null), eq(null), eq(null), eq(null), eq(null))
         verify(response, times(1)).addCookie(any<Cookie>())
         verify(response, times(1)).sendRedirect(eq(link.to))
     }

@@ -1,12 +1,15 @@
 package `is`.ricko.bounce.oauth
 
+import `is`.ricko.bounce.config.OAUTH_ENABLED
 import `is`.ricko.bounce.data.BounceAdminGateway
+import org.springframework.context.annotation.Profile
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException
 import org.springframework.security.oauth2.core.OAuth2Error
 import org.springframework.security.oauth2.core.user.OAuth2User
 
+@Profile(OAUTH_ENABLED)
 class BounceOAuthUserService constructor(private val adminGateway: BounceAdminGateway) : DefaultOAuth2UserService() {
     override fun loadUser(userRequest: OAuth2UserRequest?): OAuth2User {
         val user = super.loadUser(userRequest)

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.filter.OncePerRequestFilter
 import java.util.concurrent.atomic.AtomicLong
 import javax.servlet.FilterChain
+import javax.servlet.http.Cookie
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -69,9 +70,12 @@ class RequestLogger(config: BounceConfig) : OncePerRequestFilter() {
     }
 
     private fun getCookie(request: HttpServletRequest): String? {
-        for (cookie in request.cookies) {
-            if (cookie.name == cookieName) {
-                return cookie.value
+        val cookies: Array<Cookie?>? = request.cookies
+        if (cookies != null) {
+            for (cookie in cookies) {
+                if (cookie != null && cookie.name == cookieName) {
+                    return cookie.value
+                }
             }
         }
         return null
