@@ -4,3 +4,5 @@
 mvnw
 mvnw.cmd
 lib/
+/bounce/src/main/resources/application-dev.properties
+/bounce/src/test/resources/application.properties
