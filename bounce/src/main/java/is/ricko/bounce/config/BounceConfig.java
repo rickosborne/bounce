@@ -11,6 +11,8 @@ import java.util.Map;
 @Configuration
 @Getter
 public class BounceConfig {
+  public static final String COOKIE_NAME_DEFAULT = "bounce";
+  public static final String DOMAIN_DEFAULT = "ricko.is";
   public static final String GITHUB = "github";
   public static final String GOOGLE = "google";
 
@@ -19,11 +21,11 @@ public class BounceConfig {
 
   private int cookieMaxAge = 2147483647;
 
-  @Setter(onMethod = @__(@Value("${is.ricko.bounce.cookie.name:bounce}")))
-  private String cookieName = "bounce";
+  @Setter(onMethod = @__(@Value("${is.ricko.bounce.cookie.name:" + COOKIE_NAME_DEFAULT + "}")))
+  private String cookieName = COOKIE_NAME_DEFAULT;
 
-  @Setter(onMethod = @__(@Value("${is.ricko.bounce.domain:ricko.is}")))
-  private String domain = "ricko.is";
+  @Setter(onMethod = @__(@Value("${is.ricko.bounce.domain:" + DOMAIN_DEFAULT + "}")))
+  private String domain = DOMAIN_DEFAULT;
 
   @Setter(onMethod = @__(@Value("${is.ricko.bounce.jdbc.password}")))
   private String jdbcPassword = null;

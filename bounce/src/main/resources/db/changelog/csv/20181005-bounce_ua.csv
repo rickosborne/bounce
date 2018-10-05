@@ -1,0 +1,18 @@
+"ua_priority","ua_regex","ua_vendor","ua_major","ua_ver","ua_mobile","ua_bot"
+200,"Android.*\\sFirefox/((\\d+)\\.\\d+)","Firefox","-2","-1","1",NULL
+250,"Opera/((\\d+)\\.\\d+).*Opera Mini","Opera","-2","-1","1",NULL
+300,"Opera/9.*Version/((\\d+)\\.\\d+)","Opera","-2","-1","1",NULL
+320,"TweetmemeBot","Misc Bot",NULL,NULL,NULL,"1"
+350,"(Firefox|Opera)/((\\d+)\\.\\d+)","-1","-3","-2",NULL,NULL
+400,"(MSIE) ((\\d+)\\.\\d+)","-1","-3","-2",NULL,NULL
+450,"\\sChrome/((\\d+)\\.\\d+)","Chrome","-2","-1",NULL,NULL
+500,"\\sVersion/((\\d+)\\.\\d+)\\S*\\sMobile/?\\S*\\sSafari/\\d","Safari","-2","-1","1",NULL
+510,"(iPhone|iPad).*AppleWebKit/\\d.*Mobile/","Safari",NULL,NULL,"1",NULL
+550,"\\sVersion/((\\d+)\\.\\d+).*\\sSafari/\\d","Safari","-2","-1",NULL,NULL
+600,"\\sSafari/\\d","Safari",NULL,NULL,NULL,NULL
+800,"Yahoo Slurp","Yahoo",NULL,NULL,NULL,"1"
+805,"Googlebot/((\\d+)\\.\\d+)","Google","-2","-1",NULL,"1"
+806,"Twitterbot/((\\d+)\\.\\d+)","Twitter","-2","-1",NULL,"1"
+840,"libcurl/((\\d+)\\.\\d+)","Misc Bot","-2","-1",NULL,"1"
+850,"urlresolver|PycURL|PostRank|hourlypress|Summify|NING|LongURL|MetaURI","Misc Bot",NULL,NULL,NULL,"1"
+860,"^(Java/|PostPost)","Misc Bot",NULL,NULL,NULL,"1"

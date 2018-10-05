@@ -11,6 +11,10 @@ import java.util.UUID;
 
 @UtilityClass
 public class BounceUtil {
+  public static Cookie buildCookie(final String name, final String value) {
+    return buildCookie(name, value, null, null, 0);
+  }
+
   public static Cookie buildCookie(final String name, final String value, final String comment, final String domain, final int maxAge) {
     final String sessionId;
     if (value == null || value.isEmpty()) {
@@ -23,8 +27,8 @@ public class BounceUtil {
       sessionId = value;
     }
     final Cookie outCookie = new Cookie(name, sessionId);
-    outCookie.setComment(comment);
-    outCookie.setDomain(domain);
+    if (comment != null) outCookie.setComment(comment);
+    if (domain != null) outCookie.setDomain(domain);
     outCookie.setMaxAge(maxAge);
     outCookie.setHttpOnly(true);
     return outCookie;

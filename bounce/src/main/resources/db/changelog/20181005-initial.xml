@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="20181005" author="ricko">
+		<createTable tableName="bounce_admin">
+			<column name="admin_email" type="varchar(128)">
+				<constraints nullable="false" unique="true" primaryKey="true" />
+			</column>
+			<column name="admin_name" type="varchar(64)" />
+		</createTable>
+		<createTable tableName="bounce_link">
+			<column name="link_id" type="int" autoIncrement="true" startWith="1">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="PK_bounce_link_id" />
+			</column>
+			<column name="link_name" type="varchar(24)" remarks="Short URL-safe slug">
+				<constraints nullable="false" unique="true" uniqueConstraintName="UX_bounce_link_name" />
+			</column>
+			<column name="link_created" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="link_hits" type="int" defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="link_peeks" type="int" defaultValueNumeric="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="link_to" type="varchar(1000)" remarks="Destination URL">
+				<constraints nullable="false" />
+			</column>
+			<column name="link_title" type="varchar(200)" remarks="Human-readable title or description" />
+		</createTable>
+		<createTable tableName="bounce_hit">
+			<column name="hit_id" type="int" autoIncrement="true" startWith="1">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="PK_bounce_hit_id" />
+			</column>
+			<column name="hit_link" type="int">
+				<constraints referencedTableName="bounce_link" referencedColumnNames="link_id" foreignKeyName="FK_bounce_hit_link_id" />
+			</column>
+			<column name="hit_dt" type="datetime">
+				<constraints nullable="false" />
+			</column>
+			<column name="hit_ip4" type="int" remarks="Remote address IPv4 in big-endian form">
+				<constraints nullable="false" />
+			</column>
+			<column name="hit_ref" type="varchar(255)" remarks="Referer, if provided" />
+			<column name="hit_ua" type="varchar(255)" remarks="User-Agent, if provided" />
+			<column name="hit_cookie" type="varchar(32)" remarks="Tracking cookie, if provided" />
+			<column name="hit_ua_vendor" type="varchar(12)" remarks="User-Agent vendor, if provided" />
+			<column name="hit_ua_major" type="int" remarks="User-Agent major version, if provided" />
+			<column name="hit_ua_ver" type="varchar(8)" remarks="User-Agent version, if provided" />
+			<column name="hit_mobile" type="boolean" remarks="If UA is mobile" />
+			<column name="hit_bot" type="boolean" remarks="If UA is bot" />
+			<column name="hit_ip6" type="blob" remarks="Remote address IPv6" />
+		</createTable>
+		<createTable tableName="bounce_ua">
+			<column name="ua_priority" type="int">
+				<constraints primaryKey="true" primaryKeyName="PK_bounce_ua_priority" nullable="false" />
+			</column>
+			<column name="ua_regex" type="varchar(100)">
+				<constraints nullable="false" />
+			</column>
+			<column name="ua_vendor" type="varchar(16)" />
+			<column name="ua_major" type="varchar(8)" />
+			<column name="ua_ver" type="varchar(8)" />
+			<column name="ua_mobile" type="varchar(8)" />
+			<column name="ua_bot" type="varchar(8)" />
+		</createTable>
+		<loadData tableName="bounce_ua" file="classpath:/db/changelog/csv/20181005-bounce_ua.csv" quotchar='"'>
+			<column name="ua_priority" type="numeric" />
+			<column name="ua_regex" />
+			<column name="ua_vendor" />
+			<column name="ua_major" />
+			<column name="ua_ver" />
+			<column name="ua_mobile" />
+			<column name="ua_bot" />
+		</loadData>
+		<insert tableName="bounce_link">
+			<column name="link_name" value="" />
+			<column name="link_created" valueDate="2010-12-27 18:44:48" />
+			<column name="link_to" value="https://rickosborne.org/" />
+			<column name="link_title" value="rick osborne dot org" />
+		</insert>
+	</changeSet>
+
+</databaseChangeLog>
