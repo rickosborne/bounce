@@ -1,0 +1,19 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": "auth != null",
+    "bounce": {
+      ".read": true,
+      "$linkName": {
+        "hits": {
+          ".write": true,
+          ".validate": "newData.isNumber() && newData.val() == data.val() + 1"
+        },
+        "peeks": {
+          ".write": true,
+          ".validate": "newData.isNumber() && newData.val() == data.val() + 1"
+        }
+      }
+    }
+  }
+}
