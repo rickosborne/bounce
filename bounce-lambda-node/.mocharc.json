@@ -1,0 +1,8 @@
+{
+  "spec": [
+    "impl/**/*.test.ts",
+    "bounce-link-handler/test/**/*.test.ts"
+  ],
+  "require": "ts-node/register",
+  "bail": false
+}

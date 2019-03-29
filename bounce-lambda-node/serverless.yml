@@ -1,0 +1,42 @@
+service: ricko-is-bounce
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  profile: bounce-serverless
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+        - lambda:InvokeAsync
+      Resource: "*"
+  region: us-west-1
+
+package:
+  include:
+    - dist/**
+
+functions:
+  handleBounceRequest:
+    handler: bounce-link-handler/index.handleBounceRequest
+    events:
+      - http:
+          path: "/{linkId}"
+          method: get
+#    environment:
+#      BUCKET: is-ricko-bounce
+#      REGION: us-west-1
+#    iamRoleStatements:
+#      - Effect: "Allow"
+#        Action:
+#          - "s3:GetObject"
+#        Resource: "arn:aws:s3:::is-ricko-bounce/*"
+#      - Effect: "Allow"
+#        Action:
+#          - "s3:PutObject"
+#        Resource: "arn:aws:s3:::is-ricko-bounce/*"
+
+plugins:
+  - serverless-offline
+  - serverless-mocha-plugin

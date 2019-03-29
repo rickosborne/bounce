@@ -1,0 +1,47 @@
+{
+  "name": "bounce-lambda-node",
+  "version": "0.1.0",
+  "scripts": {
+    "test": "node $NODE_DEBUG_OPTION node_modules/.bin/nyc mocha --config .mocharc.json"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.23",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.12.0",
+    "aws-lambda": "^0.1.2",
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
+    "serverless": "^1.39.1",
+    "serverless-mocha-plugin": "^1.9.2",
+    "serverless-offline": "^4.9.2",
+    "source-map-support": "^0.5.11",
+    "ts-lint": "^4.5.1",
+    "ts-mocha": "^6.0.0",
+    "ts-node": "^8.0.3"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.427.0",
+    "inclined-plane": "^0.5.0",
+    "pregenerated-primes": "0.0.6",
+    "typescript": "^3.3.4000"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "**/*.test.ts",
+      "**/dist",
+      "**/Testable*"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "text"
+    ],
+    "sourceMap": true
+  }
+}
