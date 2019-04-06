@@ -2,22 +2,7 @@ import {expect} from 'chai';
 import {describe, it} from 'mocha';
 
 import {Deserializer, DynamoParser} from './DynamoParser';
-
-interface OneRequiredString {
-  req: string;
-}
-
-interface OneOptionalString {
-  opt?: string;
-}
-
-interface OneOptionalInt {
-  opt?: number;
-}
-
-interface OneOptionalDate {
-  opt?: Date;
-}
+import {OneOptionalDate, OneOptionalInt, OneOptionalString, OneRequiredString} from "./ParserTest";
 
 const oneRequiredStringDeserializer: Deserializer<OneRequiredString> = new DynamoParser<OneRequiredString>('OneRequiredString')
   .requiredString('req')
@@ -38,7 +23,10 @@ const oneOptionalDateDeserializer: Deserializer<OneOptionalDate> = new DynamoPar
 describe('DynamoParser', () => {
   describe('requiredString', () => {
     it('returns correct value for good data', () => {
-      expect(oneRequiredStringDeserializer.deserialize({req: {S: 'foo'}, unused: {S: 'bar'}})).deep.equals({req: 'foo'});
+      expect(oneRequiredStringDeserializer.deserialize({
+        req: {S: 'foo'},
+        unused: {S: 'bar'},
+      })).deep.equals({req: 'foo'});
     });
     it('returns null for missing string', () => {
       expect(oneRequiredStringDeserializer.deserialize({unused: {S: 'bar'}})).equals(null);
@@ -49,7 +37,10 @@ describe('DynamoParser', () => {
   });
   describe('optionalString', () => {
     it('returns correct value for valid present data', () => {
-      expect(oneOptionalStringDeserializer.deserialize({opt: {S: 'foo'}, unused: {S: 'bar'}})).deep.equals({opt: 'foo'});
+      expect(oneOptionalStringDeserializer.deserialize({
+        opt: {S: 'foo'},
+        unused: {S: 'bar'},
+      })).deep.equals({opt: 'foo'});
     });
     it('returns empty for valid missing data', () => {
       expect(oneOptionalStringDeserializer.deserialize({unused: {S: 'foo'}})).deep.equals({});

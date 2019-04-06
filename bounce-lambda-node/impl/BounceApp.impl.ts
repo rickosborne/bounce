@@ -14,6 +14,10 @@ export class BounceAppImpl implements BounceApp {
     @BounceDataStore.required private readonly store: BounceDataStore,
   ) {}
 
+  public createLink(link: BounceLink): Promise<BounceLink | null> {
+    return this.store.createLink(link);
+  }
+
   public defaultLink(): BounceLink {
     return BounceAppImpl.LINK_DEFAULT;
   }
