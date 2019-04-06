@@ -1,19 +1,20 @@
-import {PathLike} from "fs";
-import * as fs from 'fs';
-import * as process from 'process';
+import fs from 'fs';
+import process from 'process';
 import {BounceConfig, BounceDynamoStoreConfig, BounceS3StoreConfig, BounceStoreConfig} from "../api/BounceConfig";
+
+const fsModule = fs;
 
 export interface Env {
   [key: string]: string | undefined;
 }
 
 export interface FSLike {
-  readFileSync(path: PathLike | number, options: { encoding: string; flag?: string; } | string): string;
+  readFileSync(path: fs.PathLike | number, options: { encoding: string; flag?: string; } | string): string;
 }
 
 export class BounceEnvConfig {
   constructor(
-    private readonly _fs: FSLike = fs,
+    private readonly _fs: FSLike = fsModule,
   ) {
   }
 

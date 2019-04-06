@@ -5,7 +5,6 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "inlineSourceMap": true,
     "lib": [
       "es2017"
     ],
@@ -27,7 +26,7 @@
     ]
   },
   "exclude": [
-    "node_modules",
-    "test"
+    "**/test/**/*.ts",
+    "**/*.test.ts"
   ]
 }
