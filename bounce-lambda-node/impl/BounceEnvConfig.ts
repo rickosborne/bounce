@@ -23,9 +23,9 @@ export class BounceEnvConfig {
     /* istanbul ignore next */
     env: Env = process.env,
   ): BounceConfig {
-    const credentialsFile = this.required(env, 'AWS_CREDENTIALS_FILE');
-    const credentialsProfile = this.required(env, 'AWS_CREDENTIALS_PROFILE');
-    const awsCredentials: { key: string, secret: string } = {key: '', secret: ''};
+    const credentialsFile = this.optional(env, 'AWS_CREDENTIALS_FILE');
+    const credentialsProfile = this.optional(env, 'AWS_CREDENTIALS_PROFILE');
+    const awsCredentials: { key: string | undefined, secret: string | undefined } = {key: '', secret: ''};
     if (credentialsFile != null && credentialsProfile != null) {
       const creds = this._fs.readFileSync(credentialsFile, {encoding: 'utf-8'});
       const matches = new RegExp(`(?:^|\n)\\[${credentialsProfile}]\\s+` +
@@ -43,6 +43,9 @@ export class BounceEnvConfig {
       } else {
         throw new Error(`Could not extract credentials profile: ${credentialsFile} : ${credentialsProfile}`);
       }
+    } else {
+      awsCredentials.key = this.optional(env, 'AWS_ACCESS_KEY') || undefined;
+      awsCredentials.secret = this.optional(env, 'AWS_ACCESS_SECRET') || undefined;
     }
     let store: BounceStoreConfig;
     const storeType = this.required(env, 'BOUNCE_STORE_TYPE');

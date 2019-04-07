@@ -1,8 +1,8 @@
 import {injectableType} from "inclined-plane";
 
 export interface BounceStoreConfig {
-  awsAccessKey: string;
-  awsAccessSecret: string;
+  awsAccessKey: string | undefined;
+  awsAccessSecret: string | undefined;
   type: string;
 }
 
