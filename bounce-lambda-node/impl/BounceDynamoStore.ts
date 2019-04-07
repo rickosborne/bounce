@@ -96,7 +96,7 @@ export class BounceDynamoStore implements BounceDataStore {
   public linkFromName(name: string): Promise<BounceLink | null> {
     return this.load(BounceDynamoStore.LINK_TABLE, {
       name: {
-        S: name,
+        S: name === '' ? ' ' : name,  // because Dynamo does not allow empty string in a key
       },
     }).then((item) => this.linkDeserializer.deserialize(item));
   }
