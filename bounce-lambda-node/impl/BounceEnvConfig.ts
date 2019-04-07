@@ -13,13 +13,12 @@ export interface FSLike {
 }
 
 export class BounceEnvConfig {
-  constructor(
-    private readonly _fs: FSLike = fsModule,
-  ) {
+  protected static get fs() {
+    return fsModule;
   }
 
-  @BounceConfig.accessor
-  public configFromEnv(
+  @BounceConfig.supplier
+  public static configFromEnv(
     /* istanbul ignore next */
     env: Env = process.env,
   ): BounceConfig {
@@ -27,7 +26,7 @@ export class BounceEnvConfig {
     const credentialsProfile = this.optional(env, 'AWS_CREDENTIALS_PROFILE');
     const awsCredentials: { key: string | undefined, secret: string | undefined } = {key: '', secret: ''};
     if (credentialsFile != null && credentialsProfile != null) {
-      const creds = this._fs.readFileSync(credentialsFile, {encoding: 'utf-8'});
+      const creds = this.fs.readFileSync(credentialsFile, {encoding: 'utf-8'});
       const matches = new RegExp(`(?:^|\n)\\[${credentialsProfile}]\\s+` +
         `(aws_access_key_id|aws_secret_access_key)\\s*=\\s*(\\S+)\\s+` +
         `(?:aws_access_key_id|aws_secret_access_key)\\s*=\\s*(\\S+)`, 's')
@@ -76,12 +75,12 @@ export class BounceEnvConfig {
     };
   }
 
-  protected optional(env: Env, key: string): string | null {
+  protected static optional(env: Env, key: string): string | null {
     const value = env[key];
     return value == null ? null : value;
   }
 
-  protected required(env: Env, key: string): string {
+  protected static required(env: Env, key: string): string {
     const value = env[key];
     if (value == null) {
       throw new Error(`Missing required environment config: ${key}`);

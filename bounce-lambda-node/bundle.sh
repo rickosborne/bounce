@@ -30,7 +30,7 @@ zip "../${BOUNCE_ZIP}" -r .
 popd
 
 # Clean up after
-rm -rf dist
+# rm -rf dist
 
 echo "Version: '${BOUNCE_VERSION}'"
 echo "Zip: '${BOUNCE_ZIP}'"
