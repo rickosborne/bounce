@@ -106,7 +106,7 @@ export class DynamoParser<T, C = {}> implements Deserializer<T> {
       optional: false,
       setter: this.requiredSetter<KEY, U>(key),
     });
-    return this;
+    return this as any;
   }
 
   private stringConverter(): (value: DynamoDB.AttributeValue) => string | undefined {

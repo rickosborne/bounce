@@ -13,12 +13,10 @@ export interface FSLike {
 }
 
 export class BounceEnvConfig {
-  protected static get fs() {
-    return fsModule;
-  }
+  constructor(public readonly fs: FSLike = fsModule) {}
 
-  @BounceConfig.supplier
-  public static configFromEnv(
+  @BounceConfig.accessor
+  public configFromEnv(
     /* istanbul ignore next */
     env: Env = process.env,
   ): BounceConfig {
@@ -75,12 +73,12 @@ export class BounceEnvConfig {
     };
   }
 
-  protected static optional(env: Env, key: string): string | null {
+  protected optional(env: Env, key: string): string | null {
     const value = env[key];
     return value == null ? null : value;
   }
 
-  protected static required(env: Env, key: string): string {
+  protected required(env: Env, key: string): string {
     const value = env[key];
     if (value == null) {
       throw new Error(`Missing required environment config: ${key}`);

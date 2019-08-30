@@ -141,7 +141,7 @@ export class JsonParserImpl<INTERFACE, COMPOSED = {}> implements JsonParser<INTE
       setter: this.requiredSetter<KEY, FIELD>(key),
       typeName: 'string',
     });
-    return this;
+    return this as any;
   }
 
   private stringConverter(throwOnError: boolean): (value: any) => string | undefined {

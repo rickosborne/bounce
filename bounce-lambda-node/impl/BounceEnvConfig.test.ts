@@ -36,16 +36,20 @@ function testableFS(result: string = credsFile1): FSLike {
 
 describe('BounceEnvConfig', () => {
   describe('configFromEnv', () => {
-    it('throws when missing AWS_CREDENTIALS_FILE', () => {
+    it('throws when missing BOUNCE_STORE_TYPE', () => {
       expect(() => new TestableBounceEnvConfig().configFromEnv({}))
-        .throws(/Missing required environment config: AWS_CREDENTIALS_FILE/);
+        .throws(/Missing required environment config: BOUNCE_STORE_TYPE/);
     });
-    it('throws when missing AWS_CREDENTIALS_PROFILE', () => {
-      expect(() => new TestableBounceEnvConfig().configFromEnv({
-        AWS_CREDENTIALS_FILE: 'creds',
-      }))
-        .throws(/Missing required environment config: AWS_CREDENTIALS_PROFILE/);
-    });
+    // it('throws when missing AWS_CREDENTIALS_FILE', () => {
+    //   expect(() => new TestableBounceEnvConfig().configFromEnv({}))
+    //     .throws(/Missing required environment config: AWS_CREDENTIALS_FILE/);
+    // });
+    // it('throws when missing AWS_CREDENTIALS_PROFILE', () => {
+    //   expect(() => new TestableBounceEnvConfig().configFromEnv({
+    //     AWS_CREDENTIALS_FILE: 'creds',
+    //   }))
+    //     .throws(/Missing required environment config: AWS_CREDENTIALS_PROFILE/);
+    // });
     it('throws when missing credentials in file', () => {
       expect(() => new TestableBounceEnvConfig(testableFS('[other]')).configFromEnv({
         AWS_CREDENTIALS_FILE: configPath,

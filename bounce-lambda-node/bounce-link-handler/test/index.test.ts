@@ -19,7 +19,6 @@ const context: Context = {
       appVersionName: "appVersionName",
       installationId: "installationId",
     },
-    custom: false,
     env: {
       locale: "en-us",
       make: "make",
