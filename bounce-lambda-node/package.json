@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "aws-lambda": "^1.0.5",
-    "aws-sdk": "^2.814.0",
+    "aws-sdk": "^2.1354.0",
     "inclined-plane": "^0.5.3",
     "pregenerated-primes": "0.0.6"
   },
